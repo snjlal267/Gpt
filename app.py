@@ -1,8 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from g4f.client import Client
+from flask_cors import CORS
 
 app = Flask(__name__)
 client = Client()
+CORS(app)
+
+@app.route('/')
+def index():
+    return send_from_directory('', 'index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
